@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Komponen & Riwayat</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.252);
+            background-color: #edeeff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+        #riwayatSection {
+            display: none; /* Awalnya disembunyikan */
+        }
+
+        /* Media Queries untuk Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .form-group {
+                margin-bottom: 10px;
+            }
+            select, input, button {
+                padding: 6px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            th, td {
+                padding: 6px;
+            }
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 14px;
+            }
+            .footer {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            .card {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            .form-group {
+                margin-bottom: 5px;
+            }
+            select, input, button {
+                padding: 4px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            th, td {
+                padding: 4px;
+            }
+            th {
+                font-size: 12px;
+            }
+            td {
+                font-size: 12px;
+            }
+            .footer {
+                font-size: 12px;
+            }
+        }
+
+        /* Styling untuk tombol yang dipilih */
+        .selected {
+            background-color: #35ad1a; /* Warna gelap */
+        }
+
+        /* Styling untuk tombol */
+        button {
+            background-color: #000680;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:active {
+            background-color: #010dec;
+        }
+    </style>
+</head>
+<body>
+    <h1>STOCK OPNAME SMT REEL</h1>
+
+    <!-- Tombol Reset -->
+    <div class="form-group">
+        <button onclick="resetData()">Reset</button>
+    </div>
+
+    <!-- Lokasi dan Operator -->
+    <div class="card">
+        <div class="form-group">
+            <label for="location_main">Lokasi:</label>
+            <select id="location_main">
+                <option value="SMT 1">SMT 1</option>
+                <option value="SMT 2">SMT 2</option>
+                <option value="SMT 3">SMT 3</option>
+                <option value="SMT 4">RACK</option>
+            </select>
+        </div>
+        <!-- <div class="form-group">
+            <label for="operator_main">Nama Operator:</label>
+            <select id="operator_main">
+                <option value="Rio">Rio</option>
+                <option value="Budi">Budi</option>
+                <option value="Albizar">Albizar</option>
+                <option value="Agung">Agung</option>
+            </select>
+        </div> -->
+        <div class="form-group">
+            <label for="operator_main">Nama Operator:</label>
+            <input type="text" id="operator_main" placeholder="Masukkan nama operator">
+        </div>
+        <div class="form-group">
+            <button onclick="toggleListBox('paper')" id="paperButton">Paper</button>
+            <button onclick="toggleListBox('embos')" id="embosButton">Embosh</button>
+        </div>
+        <div class="form-group">
+            <label for="listBox1_main">BOX PAPER:</label>
+            <input type="text" id="listBox1_main" list="options1" onchange="updateSelectedItem('listBox1_main')" disabled>
+            <datalist id="options1">
+                <!-- <option value="D0GA100JA023">
+                <option value="D0GA101JA023">
+                <option value="D0GA102JA023"> -->
+
+                <option value="D0GA100JA023"></option>
+                <option value="D0GA101JA023"></option>
+                <option value="D0GA102JA023"></option>
+                <option value="D0GA103JA023"></option>
+                <option value="D0GA104JA023"></option>
+                <option value="D0GA105JA023"></option>
+                <option value="D0GA122JA023"></option>
+                <option value="D0GA123JA023"></option>
+                <option value="D0GA180JA023"></option>
+                <option value="D0GA183JA023"></option>
+                <option value="D0GA201JA023"></option>
+                <option value="D0GA203JA023"></option>
+                <option value="D0GA220JA023"></option>
+                <option value="D0GA221JA023"></option>
+                <option value="D0GA222JA023"></option>
+                <option value="D0GA224JA023"></option>
+                <option value="D0GA243JA023"></option>
+                <option value="D0GA271JA023"></option>
+                <option value="D0GA273JA023"></option>
+                <option value="D0GA330JA023"></option>
+                <option value="D0GA331JA023"></option>
+                <option value="D0GA333JA023"></option>
+                <option value="D0GA472JA023"></option>
+                <option value="D0GA473JA023"></option>
+                <option value="D0GA512JA023"></option>
+                <option value="D0GA560JA023"></option>
+                <option value="D0GA563JA023"></option>
+                <option value="D0GA681JA023"></option>
+                <option value="D0GA682JA023"></option>
+                <option value="D0GA822JA023"></option>
+                <option value="D0GAR00J0005"></option>
+                <option value="D0GB100JA065"></option>
+                <option value="D0GB101JA065"></option>
+                <option value="D0GB102JA065"></option>
+                <option value="D0GB102ZA028"></option>
+                <option value="D0GB103JA065"></option>
+                <option value="D0GB104JA065"></option>
+                <option value="D0GB105JA065"></option>
+                <option value="D0GB112JA065"></option>
+                <option value="D0GB122JA065"></option>
+                <option value="D0GB123JA065"></option>
+                <option value="D0GB124JA065"></option>
+                <option value="D0GB132JA065"></option>
+                <option value="D0GB133JA065"></option>
+                <option value="D0GB150JA065"></option>
+                <option value="D0GB151JA065"></option>
+                <option value="D0GB152JA065"></option>
+                <option value="D0GB153JA065"></option>
+                <option value="D0GB154JA065"></option>
+                <option value="D0GB162JA065"></option>
+                <option value="D0GB182JA065"></option>
+                <option value="D0GB183JA065"></option>
+                <option value="D0GB184JA065"></option>
+                <option value="D0GB202JA007"></option>
+                <option value="D0GB202JA065"></option>
+                <option value="D0GB203JA065"></option>
+                <option value="D0GB220JA065"></option>
+                <option value="D0GB221JA065"></option>
+                <option value="D0GB222JA065"></option>
+                <option value="D0GB223JA065"></option>
+                <option value="D0GB224JA065"></option>
+                <option value="D0GB243JA065"></option>
+                <option value="D0GB271JA065"></option>
+                <option value="D0GB272JA065"></option>
+                <option value="D0GB273JA065"></option>
+                <option value="D0GB2R2JA065"></option>
+                <option value="D0GB303ZA028"></option>
+                <option value="D0GB330JA065"></option>
+                <option value="D0GB331JA065"></option>
+                <option value="D0GB332JA065"></option>
+                <option value="D0GB332ZA029"></option>
+                <option value="D0GB333JA065"></option>
+                <option value="D0GB334JA065"></option>
+                <option value="D0GB3R3JA065"></option>
+                <option value="D0GB431JA065"></option>
+                <option value="D0GB470JA065"></option>
+                <option value="D0GB471JA065"></option>
+                <option value="D0GB472JA065"></option>
+                <option value="D0GB472ZA028"></option>
+                <option value="D0GB473JA065"></option>
+                <option value="D0GB474JA065"></option>
+                <option value="D0GB475JA065"></option>
+                <option value="D0GB4R7JA065"></option>
+                <option value="D0GB510JA065"></option>
+                <option value="D0GB511JA065"></option>
+                <option value="D0GB512JA065"></option>
+                <option value="D0GB561JA065"></option>
+                <option value="D0GB562JA065"></option>
+                <option value="D0GB563JA065"></option>
+                <option value="D0GB680JA065"></option>
+                <option value="D0GB681JA065"></option>
+                <option value="D0GB682JA065"></option>
+                <option value="D0GB683JA065"></option>
+                <option value="D0GB684JA065"></option>
+                <option value="D0GB752JA065"></option>
+                <option value="D0GB820JA065"></option>
+                <option value="D0GB821JA065"></option>
+                <option value="D0GB822JA065"></option>
+                <option value="D0GB912ZA029"></option>
+                <option value="D0GBR00J0004"></option>
+                <option value="D0GD101JA052"></option>
+                <option value="D0GD102JA052"></option>
+                <option value="D0GD103JA052"></option>
+                <option value="D0GD104JA052"></option>
+                <option value="D0GD122JA052"></option>
+                <option value="D0GD202JA052"></option>
+                <option value="D0GD271JA052"></option>
+                <option value="D0GD470JA052"></option>
+                <option value="D0GD471JA052"></option>
+                <option value="D0GD681JA052"></option>
+                <option value="D0GD752JA052"></option>
+                <option value="D0GDR00J0004"></option>
+                <option value="D0GF101JA048"></option>
+                <option value="D0GF102JA048"></option>
+                <option value="D0GF102ZA002"></option>
+                <option value="D0GF104JA048"></option>
+                <option value="D0GF122JA048"></option>
+                <option value="D0GF150JA048"></option>
+                <option value="D0GF181JA048"></option>
+                <option value="D0GF220JA048"></option>
+                <option value="D0GF1R2JA048"></option>
+                <option value="D0GF6R8JA048"></option>
+                <option value="D0GF222JA048"></option>
+                <option value="D0GF242ZA002"></option>
+                <option value="D0GF243JA048"></option>
+                <option value="D0GF271JA048"></option>
+                <option value="D0GF301JA038"></option>
+                <option value="D0GF333JA048"></option>
+                <option value="D0GF334JA048"></option>
+                <option value="D0GF360JA048"></option>
+                <option value="D0GF364JA048"></option>
+                <option value="D0GF622JA048"></option>
+                <option value="D0GF681JA048"></option>
+                <option value="D0GF751JA048"></option>
+                <option value="D0GFR00J0005"></option>
+                <option value="D0GG204JA039"></option>
+                <option value="D0GL104J0001"></option>
+                <option value="D0GR220JA022"></option>
+                <option value="D0GZ104JA022"></option>
+                <option value="D0GZ430JA022"></option>
+                <option value="D0GZ751JA022"></option>
+                <option value="D0YBR0000038"></option>
+                <option value="D0YFR00J0002"></option>
+                <option value="D1BA1002A023"></option>
+                <option value="D1BA1003A023"></option>
+                <option value="D1BA1502A023"></option>
+                <option value="D1BA1302A023"></option>
+                <option value="D1BA1800A023"></option>
+                <option value="D1BA1802A022"></option>
+                <option value="D1BA2002A023"></option>
+                <option value="D1BA2701A023"></option>
+                <option value="D1BA3001A023"></option>
+                <option value="D1BA3002A023"></option>
+                <option value="D1BA3301A022"></option>
+                <option value="D1BA3301A023"></option>
+                <option value="D1BA3903A022"></option>
+                <option value="D1BA4302A023"></option>
+                <option value="D1BA4702A022"></option>
+                <option value="D1BA5101A022"></option>
+                <option value="D1BA6803A022"></option>
+                <option value="D1BA8661A023"></option>
+                <option value="D1BA9101A023"></option>
+                <option value="D1BB1002A073"></option>
+                <option value="D1BB1002A074"></option>
+                <option value="D1BB1003A073"></option>
+                <option value="D1BB1003A074"></option>
+                <option value="D1BB1004A073"></option>
+                <option value="D1BB1202A073"></option>
+                <option value="D1BB1211A073"></option>
+                <option value="D1BB1211A141"></option>
+                <option value="D1BB1302A073"></option>
+                <option value="D1BB1501A073"></option>
+                <option value="D1BB1502A073"></option>
+                <option value="D1BB1503A074"></option>
+                <option value="D1BB1600A073"></option>
+                <option value="D1BB1802A073"></option>
+                <option value="D1BB2002A073"></option>
+                <option value="D1BB2002A074"></option>
+                <option value="D1BB2201A073"></option>
+                <option value="D1BB2203A074"></option>
+                <option value="D1BB2402A073"></option>
+                <option value="D1BB2433A074"></option>
+                <option value="D1BB2700A073"></option>
+                <option value="D1BB2702A074"></option>
+                <option value="D1BB3001A073"></option>
+                <option value="D1BB3002A073"></option>
+                <option value="D1BB3002A074"></option>
+                <option value="D1BB3301A073"></option>
+                <option value="D1BB3301A074"></option>
+                <option value="D1BB3601A073"></option>
+                <option value="D1BB3902A073"></option>
+                <option value="D1BB3921A073"></option>
+                <option value="D1BB4222A073"></option>
+                <option value="D1BB4301A074"></option>
+                <option value="D1BB4302A074"></option>
+                <option value="D1BB4702A073"></option>
+                <option value="D1BB4702A074"></option>
+                <option value="D1BB4751A073"></option>
+                <option value="D1BB5101A074"></option>
+                <option value="D1BB5102A073"></option>
+                <option value="D1BB5492A073"></option>
+                <option value="D1BB5621A073"></option>
+                <option value="D1BB6801A073"></option>
+                <option value="D1BB6802A073"></option>
+                <option value="D1BB8201A073"></option>
+                <option value="D1BB8202A073"></option>
+                <option value="D1BB82R0A073"></option>
+                <option value="D1BB8661A073"></option>
+                <option value="D1BB9101A073"></option>
+                <option value="D1BB9311A073"></option>
+                <option value="D1BD8662A066"></option>
+                <option value="D1BF1000A073"></option>
+                <option value="D1BF1100A073"></option>
+                <option value="D1BF2003A098"></option>
+                <option value="D1BF4023A073"></option>
+                <option value="D1BFR390A047"></option>
+                <option value="D1BFR430A047"></option>
+                <option value="D1BFR470A065"></option>
+                <option value="D1BFR510A065"></option>
+                <option value="D1BRR120A064"></option>
+                <option value="D4CC11030018"></option>
+                <option value="D4CC1103A038"></option>
+                <option value="D4FB1R100015"></option> <!-- NOTE -->
+                <option value="ERBRE0R50V"></option> <!-- DOGB -->
+                <option value="ERJ3GEYJ132V"></option> <!-- D0GB DONE -->
+                <option value="ERJ12YJ104U"></option> <!-- DOGZ DONE -->
+                <option value="EVQPUL02K"></option>
+                <option value="F1G0J105A063"></option>
+                <option value="F1G1A104A026"></option>
+                <option value="F1G1A1050004"></option>
+                <option value="F1G1A475A099"></option>
+                <option value="F1G1E104A078"></option>
+                <option value="F1G1E105A186"></option>
+                <option value="F1G1E224A193"></option> <!-- H,E,C DONE -->
+                <option value="F1G1E225A183"></option> <!-- H,E,C DONE -->
+                <option value="F1G1H101A807"></option>
+                <option value="F1G1H102A830"></option>
+                <option value="F1G1H102A548"></option>
+                <option value="F1G1H103A548"></option>
+                <option value="F1G1H103B104"></option>
+                <option value="F1G1H121B065"></option>
+                <option value="F1G1H152A548"></option>
+                <option value="F1G1H221A548"></option>
+                <option value="F1G1H223A548"></option>
+                <option value="F1G1H272A548"></option>
+                <option value="F1G1H330A807"></option>
+                <option value="F1G1H332A548"></option>
+                <option value="F1G1H471A548"></option>
+                <option value="F1G1H5R0B062"></option>
+                <option value="F1G1H821B065"></option>
+                <option value="F1G1H2R2A982"></option>
+                <option value="F1H0J1060003"></option>
+                <option value="F1H1A1050040"></option>
+                <option value="F1H1A154A046"></option>
+                <option value="F1H1A334A159"></option>
+                <option value="F1H1A474A046"></option>
+                <option value="F1H1A475A102"></option>
+                <option value="F1H1C103A107"></option>
+                <option value="F1H1C104A107"></option>
+                <option value="F1H1C105A107"></option>
+                <option value="F1H1C105A167"></option>
+                <option value="F1H1C225A215"></option>
+                <option value="F1H1C334A107"></option>
+                <option value="F1H1C823A107"></option> <!-- C,H DONE -->
+                <option value="F1H1E104A086"></option>
+                <option value="F1H1E1050009"></option>
+                <option value="F1H1E224A086"></option>
+                <option value="F1H1E224A161"></option>
+                <option value="F1H1E273A002"></option>
+                <option value="F1H1E473A086"></option>
+                <option value="F1H1E475A205"></option>
+                <option value="F1H1E683A086"></option>
+                <option value="F1H1H100B043"></option>
+                <option value="F1H1H1010014"></option>
+                <option value="F1H1H102A842"></option>
+                <option value="F1H1H102B047"></option>
+                <option value="F1H1H103B047"></option>
+                <option value="F1H1H103A842"></option>
+                <option value="F1H1H104B047"></option>
+                <option value="F1H1H120A860"></option>
+                <option value="F1H1H122A013"></option>
+                <option value="F1H1H150A004"></option>
+                <option value="F1H1H151B043"></option>
+                <option value="F1H1H152A842"></option>
+                <option value="F1H1H153A842"></option>
+                <option value="F1H1H180B043"></option>
+                <option value="F1H1H1R0A016"></option>
+                <option value="F1H1H200A831"></option>
+                <option value="F1H1H220B043"></option>
+                <option value="F1H1H221A004"></option>
+                <option value="F1H1H222A842"></option>
+
+                <option value="F1H1H223B047"></option>
+                <option value="F1H1H270A004"></option>
+                <option value="F1H1H272A842"></option>
+                <option value="F1H1H330B043"></option>
+                <option value="F1H1H331B043"></option>
+                <option value="F1H1H332A842"></option>
+                <option value="F1H1H333A842"></option>
+                <option value="F1H1H3R0B170"></option>
+                <option value="F1H1H471B043"></option>
+                <option value="F1H1H472A842"></option>
+                <option value="F1H1H4R0B170"></option>
+                <option value="F1H1H561A219"></option>
+                <option value="F1H1H5R0B170"></option>
+                <option value="F1H1H682A842"></option>
+                <option value="F1H1H6R0A016"></option>
+                <option value="F1H1H7R0B091"></option>
+                <option value="F1H1H822A842"></option>
+                <option value="F1H1H8R0B091"></option>
+                <!-- <option value="G1C68NJA0037"></option> -->
+                <!-- <option value="G1C330MA0989"></option> -->
+                <!-- <option value="G1C3R3MA0809"></option> -->
+                <!-- <option value="G1C4R7MA1323"></option> -->
+                <!-- <option value="G1C4R7MA0249"></option> -->
+                <!-- <option value="G1CR12GA0007"></option> -->
+                <!-- <option value="G1CR15K00017"></option> -->
+                <!-- <option value="G1CR22GA0007"></option> -->
+                <!-- <option value="H0J120500096"></option> -->
+                <!-- <option value="H0J327200085"></option> -->
+                <!-- <option value="H0J384500009"></option> -->
+                <!-- <option value="J0JBC0000019"></option> -->
+                <!-- <option value="J0JYC0000051"></option> -->
+                <!-- <option value="J0JYC0000426"></option> -->
+                <!-- <option value="J0ZZB0000238"></option> -->
+                <!-- <option value="K0D112B00067"></option> -->
+                <!-- <option value="K0H1BA000629"></option> -->
+                <!-- <option value="K1KA03BA0270"></option> -->
+                <!-- <option value="K1KY06AA2542"></option> -->
+                <!-- <option value="K1MN14BA0059"></option> -->
+                <!-- <option value="K5H501Y00012"></option> -->
+                <!-- <option value="RLQM1R0MT-M"></option> -->
+                <!-- <option value="RLQM2R2MT-M"></option> -->
+                <!-- <option value="RRV14A01C54A"></option> -->
+                <!-- <option value="RSB12JS2T2R"></option> -->
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label for="listBox2_main">BOX EMBOS:</label>
+            <input type="text" id="listBox2_main" list="options2" onchange="updateSelectedItem('listBox2_main')" disabled>
+            <datalist id="options2">
+                <!-- List of options -->
+                <option value="B0ACCK000005"></option>
+                <option value="B0ACCK000012"></option>
+                <option value="B0ACCL000017"></option>
+                <option value="B0ACDR000001"></option>
+                <option value="B0BC7R4A0259"></option>
+                <option value="B0BC8R1A0259"></option>
+                <!-- <option value="B1ABMG000014"></option> --> 
+                <!-- <option value="B0ADDH000004"></option> --> 
+                <option value="B0ADDH000009"></option>
+                <option value="B0BC019A0007"></option>
+                <option value="B0BC025A0245"></option>
+                <!-- <option value="B0BC02900004"></option> --> 
+                <option value="B0BC4R0A0006"></option>
+                <!-- <option value="B0BC8R2A0908"></option> --> 
+                <!-- <option value="B0ECKM000072"></option> --> 
+                <option value="B0ECKP000099"></option>
+                <option value="B0ECKR000089"></option>
+                <!-- <option value="B0ECKT000009"></option> --> 
+                <!-- <option value="B0ECKT000012"></option> --> 
+                <!-- <option value="B0ECMR000030"></option> --> 
+                <option value="B0ECKV000038"></option>
+                <!-- <option value="B0EDKR000014"></option> --> 
+                <!-- <option value="B0EDLU000001"></option> --> 
+                <!-- <option value="B0JCCD000020"></option> --> 
+                <option value="B0JCCD000041"></option>
+                <option value="B0JCCE000003"></option>
+                <option value="B0JCDD000046"></option>
+                <option value="B0JCGE000020"></option>
+                <option value="B0JCMA000003"></option>
+                <option value="B0JCMC000006"></option>
+                <option value="B0ECMM000009"></option>
+                <option value="B0JCNC000008"></option>
+                <option value="B0JCNE000039"></option>
+                <!-- <option value="B0JCPL000020"></option> --> 
+                <option value="B0ZBZ0000230"></option>
+                <option value="B1ABAB000064"></option>
+                <option value="B1ABCF000010"></option>
+                <option value="B1ABCF000020"></option>
+                <option value="B1ABCF000103"></option>
+                <!-- <option value="B1ABCF000176"></option> --> 
+                <option value="B1ADCE000012"></option>
+                <option value="B1ADCF000020"></option>
+                <option value="B1ADCF000063"></option>
+                <option value="B1ADGD000004"></option>
+                <!-- <option value="B1ADKD000009"></option> --> 
+                <option value="B1ADMF000016"></option>
+                <option value="B1ADND000007"></option>
+                <option value="B1CFHC000003"></option>
+                <!-- <option value="B1CFQD000023"></option> --> 
+                <option value="B1CHQD000014"></option>
+                <!-- <option value="B1CHPB000012"></option> --> 
+                <option value="B1GBCFEE0004"></option>
+                <option value="B1GBCFGG0011"></option>
+                <option value="B1GBCFGG0024"></option>
+                <!-- <option value="B1GBCFGH0001"></option> --> 
+                <!-- <option value="B1GBCFGJ0013"></option> --> 
+                <option value="B1GBCFGJ0020"></option>
+                <option value="B1GBCFGN0019"></option>
+                <option value="B1GBCFGN0022"></option>
+                <!-- <option value="B1GBCFJJ0002"></option> --> 
+                <option value="B1GBCFJJ0040"></option>
+                <option value="B1GBCFJN0009"></option>
+                <option value="B1GBCFNA0016"></option>
+                <option value="B1GDCFGG0005"></option>
+                <option value="B1GDCFGG0028"></option>
+                <!-- <option value="B1GDCFGG0033"></option> --> 
+                <!-- <option value="B1GDCFJJ0047"></option> --> 
+                <option value="B1GDCFNA0011"></option>
+                <option value="B1GDCFNN0032"></option>
+                <!-- <option value="B1GDCFGJ0010"></option> --> 
+                <option value="B1GKCFJN0004"></option>
+                <!-- <option value="B1HBGFF00034"></option> --> 
+                <!-- <option value="B1JBAR000001"></option> --> 
+                <option value="B3AAB0000322"></option>
+                <option value="B3FBZ0000015"></option>
+                <!-- <option value="B3PBA0000776"></option> --> 
+                <!-- <option value="B3PBA0000778"></option> --> 
+                <!-- <option value="B3PBA0000779"></option> --> 
+                <!-- <option value="BU2305F-E2"></option> --> 
+                <!-- <option value="C0CBABE00023"></option> --> 
+                <!-- <option value="C0CBADE00023"></option> --> 
+                <option value="C0DBAYY01511"></option>
+                <!-- <option value="C0DBAYY01639"></option> --> 
+                <!-- <option value="C0DBAYY02696"></option> --> 
+                <!-- <option value="C0DBAYY02861"></option> --> 
+                <!-- <option value="C0DBAYY03403"></option> --> 
+                <!-- <option value="C0DBBYY00090"></option> --> 
+                <option value="C0DBGYY07463"></option>
+                <option value="C0DBGYY07480"></option>
+                <!-- <option value="C0DBZMC00006"></option> --> 
+                <option value="C0DBZYY00531"></option>
+                <option value="C0EBY0000631"></option>
+                <option value="C0EBY0002216"></option>
+                <option value="C0EBY0002221"></option>
+                <option value="C0EBY0002224"></option>
+                <option value="C0EBY0002225"></option>
+                <option value="C0EBY0002226"></option>
+
+                <!-- <option value="C0ZBZ0002094">-->
+                <!-- <option value="C1AB00003764">-->
+                <!-- <option value="C1AB00004021"> -->
+                <!-- <option value="C1AB00004024"> -->
+                <!-- <option value="C1AB00004405"> -->
+                <!-- <option value="C1AB00004483"> -->
+                <!-- <option value="C1AB00004511"> -->
+                <!-- <option value="C1AB00004995"> -->
+                <!-- <option value="C1BB00000947"> -->
+                <!-- <option value="C1CB00005220"> -->
+                <!-- <option value="C2BBYY000811"> -->
+                <!-- <option value="C2BBYY002213"> -->
+                <!-- <option value="C2CBYY001714"> -->
+                <!-- <option value="C2CBYY003029"> -->
+                <!-- <option value="C2CBYY002092"> -->
+                <!-- <option value="C2CBYY002774"> -->
+                <!-- <option value="C2CBYY002775"> -->
+                <!-- <option value="C2DBYY001899"> -->
+                <!-- <option value="C3EBHY000023"> -->
+                <!-- <option value="C3FBLY000186"> -->
+            
+                <!-- <option value="F1J0J106A102"> -->
+                <!-- <option value="F1J0J226A091"> -->
+                <!-- <option value="F1J1A106A146"> -->
+                <!-- <option value="F1J1C106A224"> -->
+                <!-- <option value="F1J1E105A171"> -->
+                <!-- <option value="F1J1E106A315"> -->
+                <!-- <option value="F1J1E334A161"> -->
+                <!-- <option value="F1J2E102A036"> -->
+                <!-- <option value="F1J2E103A035"> -->
+                <!-- <option value="F1K1E106A121"> -->
+                <!-- <option value="F1K1E106A167"> -->
+                <!-- <option value="F3F0G2270002"> -->
+                <!-- <option value="F3F0J107A064"> -->
+                <!-- <option value="F3F0J1570001"> -->
+                <!-- <option value="F3F0J4760004"> -->
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label for="selectedItem_main">Selected Item:</label>
+            <input type="text" id="selectedItem_main" readonly>
+        </div>
+    </div>
+
+    <!-- Jarak Diameter Dalam dengan Luar -->
+    <div class="card">
+        <div class="form-group">
+            <label for="jarak_main">Jarak Diameter Dalam dengan Luar:</label>
+            <input type="number" id="jarak_main" oninput="hitungHasil()">
+        </div>
+        <div class="form-group">
+            <label for="hasilPerhitungan_main">Hasil Perhitungan:</label>
+            <input type="text" id="hasilPerhitungan_main" readonly>
+        </div>
+        <div class="form-group">
+            <button onclick="tambahKeTabel()">Tambah ke Tabel</button>
+        </div>
+    </div>
+
+    <!-- Tabel Input -->
+    <div class="card">
+        <h2>Tabel Input:</h2>
+        <table id="tabelInput">
+            <thead>
+                <tr>
+                    <th>Nama Komponen</th>
+                    <th>Operator</th>
+                    <th>Mesin</th>
+                    <th>Hasil</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data akan ditambahkan di sini -->
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label for="total_main">Total:</label>
+            <input type="text" id="total_main" readonly>
+        </div>
+    </div>
+
+    <!-- Tombol Riwayat -->
+    <div class="card">
+        <button onclick="showRiwayat()">Riwayat Komponen</button>
+    </div>
+
+    <!-- Bagian Riwayat (awalnya tersembunyi) -->
+    <div id="riwayatSection" class="card">
+        <h2>Riwayat Komponen</h2>
+        <!-- Lokasi -->
+        <div class="form-group">
+            <label for="location_riwayat">Lokasi:</label>
+            <select id="location_riwayat" onchange="filterData()">
+                <option value="all">Semua</option>
+                <option value="SMT 1">SMT 1</option>
+                <option value="SMT 2">SMT 2</option>
+                <option value="SMT 3">SMT 3</option>
+                <option value="SMT 4">SMT 4</option>
+            </select>
+        </div>
+
+        <!-- Tabel Riwayat -->
+        <h2>Riwayat Input:</h2>
+        <table id="tabelRiwayat">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Nama Komponen</th>
+                    <th>Operator</th>
+                    <th>Mesin</th>
+                    <th>Hasil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data akan ditambahkan di sini -->
+            </tbody>
+        </table>
+        <div class="form-group">
+            <button onclick="exportToExcel()">Export Riwayat</button>
+            <button onclick="exportTotal()">Export Total</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 PENS - Panasonic Collaboration
+    </div>
+
+    <!-- Library SheetJS untuk export Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <script>
+        let tableData = {};
+        let komponenTotal = {};
+        let historyData = {
+            'SMT 1': {},
+            'SMT 2': {},
+            'SMT 3': {},
+            'SMT 4': {},
+        };
+
+        let selectedItem = 'SMT 1';
+        let selectedOperator = 'Rio';
+        let selectedListBox1Item = null;
+        let selectedListBox2Item = null;
+        let isListBox1Active = false;
+        let isListBox2Active = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDataMain();
+        });
+
+        function loadDataMain() {
+            const tableDataString = localStorage.getItem('tableData');
+            const komponenTotalString = localStorage.getItem('komponenTotal');
+            const historyDataString = localStorage.getItem('historyData');
+
+            if (tableDataString && komponenTotalString && historyDataString) {
+                tableData = JSON.parse(tableDataString);
+                komponenTotal = JSON.parse(komponenTotalString);
+                historyData = JSON.parse(historyDataString);
+                renderTable();
+                updateTotal();
+                renderTableRiwayat();
+            }
+        }
+
+        function toggleListBox(type) {
+            const paperButton = document.getElementById('paperButton');
+            const embosButton = document.getElementById('embosButton');
+
+            if (type === 'paper') {
+                isListBox1Active = true;
+                isListBox2Active = false;
+                document.getElementById('listBox1_main').disabled = false;
+                document.getElementById('listBox2_main').disabled = true;
+                document.getElementById('listBox2_main').value = '';
+                selectedListBox2Item = null;
+                paperButton.classList.add('selected');
+                embosButton.classList.remove('selected');
+            } else if (type === 'embos') {
+                isListBox1Active = false;
+                isListBox2Active = true;
+                document.getElementById('listBox1_main').disabled = true;
+                document.getElementById('listBox2_main').disabled = false;
+                document.getElementById('listBox1_main').value = '';
+                selectedListBox1Item = null;
+                paperButton.classList.remove('selected');
+                embosButton.classList.add('selected');
+            } else {
+                isListBox1Active = false;
+                isListBox2Active = false;
+                document.getElementById('listBox1_main').disabled = true;
+                document.getElementById('listBox2_main').disabled = true;
+                document.getElementById('listBox1_main').value = '';
+                document.getElementById('listBox2_main').value = '';
+                selectedListBox1Item = null;
+                selectedListBox2Item = null;
+                paperButton.classList.remove('selected');
+                embosButton.classList.remove('selected');
+            }
+            updateSelectedItem();
+        }
+
+        function updateSelectedItem(listBoxId = null) {
+            if (listBoxId === 'listBox1_main' && isListBox1Active) {
+                selectedListBox1Item = document.getElementById('listBox1_main').value;
+                selectedListBox2Item = null;
+            } else if (listBoxId === 'listBox2_main' && isListBox2Active) {
+                selectedListBox2Item = document.getElementById('listBox2_main').value;
+                selectedListBox1Item = null;
+            }
+            document.getElementById('selectedItem_main').value = selectedListBox1Item || selectedListBox2Item || '';
+            hitungHasil();
+        }
+
+        function hitungHasil() {
+            const input = parseFloat(document.getElementById('jarak_main').value);
+            const location = document.getElementById('location_main').value;
+
+            if (input && input > 0) {
+                let dIn = 0;
+                let p = 0;
+                let t = 0;
+
+                // Data untuk listBox2
+                const listBox2Items = {
+                    'B0ACCK000005': {'dIn': 71.29, 't': 1.18, 'p': 4},  
+                    'B0ACCK000012': {'dIn': 62.09, 't': 1.2, 'p': 4}, // Tes  
+                    'B0ACCL000017': {'dIn': 56.91, 't': 1.47, 'p': 4}, // g  
+                    'B0ACDR000001': {'dIn': 62.21, 't': 1.1, 'p': 4},  
+                    'B0BC7R4A0259': {'dIn': 62.98, 't': 1.3, 'p': 4},  
+                    'B0BC8R1A0259': {'dIn': 62.5, 't': 1.28, 'p': 4}, // g  
+                    'B1ABMG000014': {'dIn': 50, 't': 2, 'p': 3.5},  
+                    'B0ADDH000004': {'dIn': 52, 't': 1.8, 'p': 3.5},  
+                    'B0ADDH000009': {'dIn': 56.94, 't': 1.467, 'p': 4}, // g  
+                    'B0BC019A0007': {'dIn': 62.08, 't': 1.13, 'p': 4}, // g  
+                    'B0BC025A0245': {'dIn': 62.76, 't': 1.2, 'p': 4}, // g  
+                    'B0BC02900004': {'dIn': 47, 't': 2.6, 'p': 8},  
+                    'B0BC4R0A0006': {'dIn': 62.18, 't': 1.15, 'p': 4}, // g  
+                    'B0BC8R2A0908': {'dIn': 41, 't': 3.8, 'p': 8},  
+                    'B0ECKM000072': {'dIn': 56, 't': 1.9, 'p': 3.5},  
+                    'B0ECKP000099': {'dIn': 64.7, 't': 2.58, 'p': 4},  
+                    'B0ECKR000089': {'dIn': 64.59, 't': 2.31, 'p': 4},  
+                    'B0ECKT000009': {'dIn': 61, 't': 2.4, 'p': 3.5},  
+                    'B0ECKT000012': {'dIn': 63, 't': 2.7, 'p': 3.5},  
+                    'B0ECMR000030': {'dIn': 64, 't': 2.9, 'p': 3.5},  
+                    'B0ECKV000038': {'dIn': 64.5, 't': 2.55, 'p': 4}, // g  
+                    'B0EDKR000014': {'dIn': 66, 't': 3.1, 'p': 3.5},  
+                    'B0EDLU000001': {'dIn': 67, 't': 3.2, 'p': 3.5},  
+                    'B0JCCD000020': {'dIn': 68, 't': 3.3, 'p': 3.5},  
+                    'B0JCCD000041': {'dIn': 62.81, 't': 1.18, 'p': 4},  
+                    'B0JCCE000003': {'dIn': 64.01, 't': 1.22, 'p': 4}, // g  
+                    'B0JCDD000046': {'dIn': 62.1, 't': 0.82, 'p': 2}, // g  
+                    'B0JCGE000020': {'dIn': 57.1, 't': 1.422, 'p': 4}, // g  
+                    'B0JCMA000003': {'dIn': 62.24, 't': 1.21, 'p': 4}, // g  
+                    'B0JCMC000006': {'dIn': 62.84, 't': 1.27, 'p': 4}, // g  
+                    'B0ECMM000009': {'dIn': 65.06, 't': 2.55, 'p': 4}, // g  
+                    'B0JCNC000008': {'dIn': 62.36, 't': 1.19, 'p': 4}, // g  
+                    'B0JCNE000039': {'dIn': 62.82, 't': 1.335, 'p': 4}, // g  
+                    'B0JCPL000020': {'dIn': 78, 't': 4.3, 'p': 3.5},  
+                    'B0ZBZ0000230': {'dIn': 62.2, 't': 0.805, 'p': 2}, // g  
+                    'B1ABAB000064': {'dIn': 63.74, 't': 1.47, 'p': 4}, // g  
+                    'B1ABCF000010': {'dIn': 62.99, 't': 1.45, 'p': 4},  
+                    'B1ABCF000020': {'dIn': 62.69, 't': 1.28, 'p': 4}, // g  
+                    'B1ABCF000103': {'dIn': 62.32, 't': 1.02, 'p': 4}, // g  
+                    'B1ABCF000176': {'dIn': 84, 't': 4.9, 'p': 3.5},  
+                    'B1ADCE000012': {'dIn': 63.15, 't': 1.4, 'p': 4}, // g  
+                    'B1ADCF000020': {'dIn': 62.4, 't': 1.05, 'p': 4}, // g  
+                    'B1ADCF000063': {'dIn': 62.74, 't': 1.26, 'p': 4}, // g  
+                    'B1ADGD000004': {'dIn': 62.7, 't': 1.25, 'p': 4}, // g  
+                    'B1ADKD000009': {'dIn': 62.8, 't': 1.37, 'p': 4},  
+                    'B1ADMF000016': {'dIn': 63.8, 't': 1.85, 'p': 8}, // g  
+                    'B1ADND000007': {'dIn': 64.36, 't': 2.11, 'p': 8},  
+                    'B1CFHC000003': {'dIn': 62.74, 't': 1.25, 'p': 4}, // g  
+                    'B1CFQD000023': {'dIn': 93, 't': 5.8, 'p': 3.5},  
+                    'B1CHQD000014': {'dIn': 62.6, 't': 1.15, 'p': 4}, // g  
+                    'B1CHPB000012': {'dIn': 95, 't': 6, 'p': 3.5},  
+                    'B1GBCFEE0004': {'dIn': 62.86, 't': 1.26, 'p': 4}, // g  
+                    'B1GBCFGG0011': {'dIn': 62.68, 't': 1.24, 'p': 4}, // g  
+                    'B1GBCFGG0024': {'dIn': 63.18, 't': 1.32, 'p': 4}, // g  
+                    'B1GBCFGH0001': {'dIn': 62.9, 't': 1.48, 'p': 4},  
+                    'B1GBCFGJ0013': {'dIn': 100, 't': 6.5, 'p': 3.5},  
+                };
+
+                // Data untuk listBox1
+                const validItemsD0GA = [
+                'D0GA100JA023', 'D0GA101JA023', 'D0GA102JA023', 'D0GA103JA023', 'D0GA104JA023', 'D0GA105JA023', 
+                'D0GA122JA023', 'D0GA123JA023', 'D0GA180JA023', 'D0GA183JA023', 'D0GA201JA023', 'D0GA203JA023', 
+                'D0GA220JA023', 'D0GA221JA023', 'D0GA222JA023', 'D0GA224JA023', 'D0GA243JA023', 'D0GA271JA023', 
+                'D0GA273JA023', 'D0GA330JA023', 'D0GA331JA023', 'D0GA333JA023', 'D0GA472JA023', 'D0GA473JA023', 
+                'D0GA512JA023', 'D0GA560JA023', 'D0GA563JA023', 'D0GA681JA023', 'D0GA682JA023', 'D0GA822JA023', 
+                'D0GAR00J0005'];
+
+                const validItemsD0GB = [
+                'D0GB100JA065', 'D0GB101JA065', 'D0GB102JA065', 'D0GB102ZA028', 'D0GB103JA065', 'D0GB104JA065', 
+                'D0GB105JA065', 'D0GB112JA065', 'D0GB122JA065', 'D0GB123JA065', 'D0GB124JA065', 'D0GB132JA065', 
+                'D0GB133JA065', 'D0GB150JA065', 'D0GB151JA065', 'D0GB152JA065', 'D0GB153JA065', 'D0GB154JA065', 
+                'D0GB162JA065', 'D0GB182JA065', 'D0GB183JA065', 'D0GB184JA065', 'D0GB202JA007', 'D0GB202JA065', 
+                'D0GB333JA065', 'D0GB334JA065', 'D0GB3R3JA065', 'D0GB431JA065', 'D0GB470JA065', 'D0GB471JA065', 
+                'D0GB472JA065', 'D0GB472ZA028', 'D0GB473JA065', 'D0GB474JA065', 'D0GB475JA065', 'D0GB4R7JA065', 
+                'D0GB510JA065', 'D0GB511JA065', 'D0GB512JA065', 'D0GB561JA065', 'D0GB562JA065', 'D0GB563JA065', 
+                'D0GB680JA065', 'D0GB681JA065', 'D0GB682JA065', 'D0GB683JA065', 'D0GB684JA065', 'D0GB752JA065', 
+                'D0GB820JA065', 'D0GB821JA065', 'D0GB822JA065', 'D0GB912ZA029', 'D0GBR00J0004', 'ERJ3GEYJ132V', 
+                'ERBRE0R50V','D0GB332JA065'
+                ];
+
+                const validItemsD0GD = [
+                'D0GD101JA052', 'D0GD102JA052', 'D0GD103JA052', 'D0GD104JA052','D0GD122JA052', 'D0GD202JA052', 
+                'D0GD271JA052', 'D0GD470JA052','D0GD471JA052', 'D0GD681JA052', 'D0GD752JA052', 'D0GDR00J0004'
+                ];
+
+                const validItemsD0GF = [
+                'D0GF101JA048', 'D0GF102JA048', 'D0GF102ZA002', 'D0GF104JA048', 'D0GF122JA048',
+                'D0GF150JA048', 'D0GF181JA048', 'D0GF220JA048', 'D0GF1R2JA048', 'D0GF6R8JA048',
+                'D0GF222JA048', 'D0GF242ZA002', 'D0GF243JA048', 'D0GF271JA048', 'D0GF301JA038',
+                'D0GF333JA048', 'D0GF334JA048', 'D0GF360JA048', 'D0GF364JA048', 'D0GF622JA048',
+                'D0GF681JA048', 'D0GF751JA048', 'D0GFR00J0005'
+                ];
+
+                const validItemsD0GL = ['D0GL104J0001'];
+
+                const validItemsD0GZ = ['D0GZ104JA022', 'D0GZ430JA022', 'D0GZ751JA022', 'ERJ12YJ104U'];
+
+                const validItemsD1BA = [
+                'D1BA1002A023', 'D1BA1003A023', 'D1BA1502A023', 'D1BA1302A023', 'D1BA1800A023',
+                'D1BA1802A022', 'D1BA2002A023', 'D1BA2701A023', 'D1BA3001A023', 'D1BA3002A023',
+                'D1BA3301A022', 'D1BA3301A023', 'D1BA3903A022', 'D1BA4302A023', 'D1BA4702A022',
+                'D1BA5101A022', 'D1BA6803A022', 'D1BA8661A023', 'D1BA9101A023'
+                ];
+
+                const validItemsD1BB = [
+                'D1BB1002A073', 'D1BB1002A074', 'D1BB1003A073', 'D1BB1003A074', 'D1BB1004A073',
+                'D1BB1202A073', 'D1BB1211A073', 'D1BB1211A141', 'D1BB1302A073', 'D1BB1501A073',
+                'D1BB1502A073', 'D1BB1503A074', 'D1BB1600A073', 'D1BB1802A073', 'D1BB2002A073',
+                'D1BB2002A074', 'D1BB2201A073', 'D1BB2203A074', 'D1BB2402A073', 'D1BB2433A074',
+                'D1BB2700A073', 'D1BB2702A074', 'D1BB3001A073', 'D1BB3002A073', 'D1BB3002A074',
+                'D1BB3301A073', 'D1BB3301A074', 'D1BB3601A073', 'D1BB3902A073', 'D1BB3921A073',
+                'D1BB4222A073', 'D1BB4301A074', 'D1BB4302A074', 'D1BB4702A073', 'D1BB4702A074',
+                'D1BB4751A073', 'D1BB5101A074', 'D1BB5102A073', 'D1BB5492A073', 'D1BB5621A073',
+                'D1BB6801A073', 'D1BB6802A073', 'D1BB8201A073', 'D1BB8202A073', 'D1BB82R0A073',
+                'D1BB8661A073', 'D1BB9101A073', 'D1BB9311A073'
+                ];
+
+                const validItemsD1BR = ['D1BRR120A064'];
+
+                const validItemsD4FB = ['D4FB1R100015'];
+
+                const validItemsD4CC = ['D4CC11030018', 'D4CC1103A038'];
+
+                const validItemsF1G1A = ['F1G1A104A026', 'F1G1A1050004', 'F1G1A475A099'];
+
+                const validItemsF1G1H = [
+                'F1G1H101A807', 'F1G1H102A830', 'F1G1H102A548', 'F1G1H103A548', 'F1G1H103B104',
+                'F1G1H121B065', 'F1G1H152A548', 'F1G1H221A548', 'F1G1H223A548', 'F1G1H272A548',
+                'F1G1H330A807', 'F1G1H332A548', 'F1G1H471A548', 'F1G1H5R0B062', 'F1G1H821B065',
+                'F1G1H2R2A982', 'F1G1E104A078', 'F1G1E105A186', 'F1G1E224A193', 'F1G1E225A183'
+                ];
+
+                const validItemsF1H1A = [
+                'F1H1A1050040', 'F1H1A154A046', 'F1H1A334A159', 'F1H1A474A046', 'F1H1A475A102'
+                ];
+
+                const validItemsF1H1E = [
+                'F1H1E104A086', 'F1H1E1050009', 'F1H1E224A086', 'F1H1E224A161', 'F1H1E273A002',
+                'F1H1E473A086', 'F1H1E475A205', 'F1H1E683A086'
+                ];
+
+                const validItemsF1H1H = [
+                'F1H1C103A107', 'F1H1C104A107', 'F1H1C105A107', 'F1H1C105A167', 'F1H1C225A215',
+                'F1H1C334A107', 'F1H1C823A107', 'F1H1H100B043', 'F1H1H1010014', 'F1H1H102A842',
+                'F1H1H102B047', 'F1H1H103B047', 'F1H1H103A842', 'F1H1H104B047', 'F1H1H120A860',
+                'F1H1H122A013', 'F1H1H150A004', 'F1H1H151B043', 'F1H1H152A842', 'F1H1H153A842',
+                'F1H1H180B043', 'F1H1H1R0A016', 'F1H1H200A831', 'F1H1H220B043', 'F1H1H221A004',
+                'F1H1H222A842', 'F1H1H223B047', 'F1H1H270A004', 'F1H1H272A842', 'F1H1H330B043',
+                'F1H1H331B043', 'F1H1H332A842', 'F1H1H333A842', 'F1H1H3R0B170', 'F1H1H471B043',
+                'F1H1H472A842', 'F1H1H4R0B170', 'F1H1H561A219', 'F1H1H5R0B170', 'F1H1H682A842',
+                'F1H1H6R0A016', 'F1H1H7R0B091', 'F1H1H822A842', 'F1H1H8R0B091'
+                ];
+
+                // Cek apakah item dari listBox2 dipilih
+                if (listBox2Items[selectedListBox2Item]) {
+                    dIn = listBox2Items[selectedListBox2Item].dIn;
+                    t = listBox2Items[selectedListBox2Item].t;
+                    p = listBox2Items[selectedListBox2Item].p;
+                } 
+                // Jika tidak, cek item dari listBox1
+                else if (selectedListBox1Item) {
+                    if (validItemsD0GA.includes(selectedListBox1Item)) {
+                        dIn = 62; // Nilai dIn untuk semua item ini 
+                        p = 2; // Nilai p untuk semua item ini 
+                        t = 0.56; // Nilai t untuk semua item ini
+                    } else if (validItemsD0GB.includes(selectedListBox1Item)) {
+                        dIn = 62; // Nilai dIn untuk semua item ini
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.7; // Nilai t untuk semua item ini 
+                    } else if (validItemsD0GD.includes(selectedListBox1Item)) {
+                        dIn = 61.6; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.86; // Nilai t untuk semua item ini 
+                    } else if (validItemsD0GF.includes(selectedListBox1Item)) {
+                        dIn = 61.59; // Nilai dIn untuk semua item ini
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.825; // Nilai t untuk semua item ini 
+                    } else if (validItemsD0GL.includes(selectedListBox1Item)) {
+                        dIn = 62.94; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.97; // Nilai t untuk semua item ini 
+                    } else if (validItemsD0GZ.includes(selectedListBox1Item)) {
+                        dIn = 61.8; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.8; // Nilai t untuk semua item ini 
+                    } else if (validItemsD1BA.includes(selectedListBox1Item)) {
+                        dIn = 60.92; // Nilai dIn untuk semua item ini 
+                        p = 2; // Nilai p untuk semua item ini 
+                        t = 0.53; // Nilai t untuk semua item ini 
+                    } else if (validItemsD1BB.includes(selectedListBox1Item)) {
+                        dIn = 61.2; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.7; // Nilai t untuk semua item ini 
+                    } else if (validItemsD1BR.includes(selectedListBox1Item)) {
+                        dIn = 60; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1; // Nilai t untuk semua item ini 
+                    } else if (validItemsD4FB.includes(selectedListBox1Item)) {
+                        dIn = 62.5; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.1; // Nilai t untuk semua item ini 
+                    } else if (validItemsD4CC.includes(selectedListBox1Item)) {
+                        dIn = 60; // Nilai dIn untuk semua item ini
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.05; // Nilai t untuk semua item ini 
+                    }  else if (validItemsF1G1A.includes(selectedListBox1Item)) {
+                        dIn = 61.6; // Nilai dIn untuk semua item ini 
+                        p = 2; // Nilai p untuk semua item ini 
+                        t = 0.7; // Nilai t untuk semua item ini 
+                    } else if (validItemsF1G1H.includes(selectedListBox1Item)) {
+                        dIn = 61.5; // Nilai dIn untuk semua item ini 
+                        p = 2; // Nilai p untuk semua item ini 
+                        t = 0.75; // Nilai t untuk semua item ini 
+                    } else if (validItemsF1H1A.includes(selectedListBox1Item)) {
+                        dIn = 63.7; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini
+                        t = 1.1; // Nilai t untuk semua item ini 
+                    } else if (validItemsF1H1E.includes(selectedListBox1Item)) {
+                        dIn = 61.8; // Nilai dIn untuk semua item ini
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.1; // Nilai t untuk semua item ini 
+                    } else if (validItemsF1H1H.includes(selectedListBox1Item)) {
+                        dIn = 62.8; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1; // Nilai t untuk semua item ini 
+                    }
+                }
+
+                // Hitung numerator dan denominator
+                const numerator = (input * 2 + dIn) * (input * 2 + dIn) - (dIn * dIn);
+                const denominator = 4 * p * t;
+
+                // Validasi hasil perhitungan
+                if (isNaN(numerator) || isNaN(denominator) || denominator === 0) {
+                    document.getElementById('hasilPerhitungan_main').value = "Perhitungan tidak valid";
+                } else {
+                    const location = document.getElementById('location_main').value;
+                    let result = 0;
+
+                    if (location === 'SMT 4') {
+                        result = (3.14 * numerator) / denominator;
+                    } else if (location === 'SMT 1' || location === 'SMT 2' || location === 'SMT 3') {
+                        if (p === 2) {
+                            result = ((3.14 * numerator) / denominator) + 460;
+                        } else if (p === 4) {
+                            result = ((3.14 * numerator) / denominator) + 230;
+                        }
+                    }
+
+                    document.getElementById('hasilPerhitungan_main').value = Math.floor(result).toString();
+                }
+            } else {
+                document.getElementById('hasilPerhitungan_main').value = "Masukkan dengan Benar";
+            }
+        }
+
+        function tambahKeTabel() {
+            const komponen = selectedListBox1Item || selectedListBox2Item;
+            const hasil = parseInt(document.getElementById('hasilPerhitungan_main').value);
+            const tanggal = new Date().toISOString().split('T')[0];
+            const mesin = document.getElementById('location_main').value;
+            const operator = document.getElementById('operator_main').value;
+
+            if (!operator.trim()) {
+                alert('Nama Operator tidak boleh kosong.');
+                return; // oprator harus terisi
+            }
+
+            if (komponen && hasil && hasil !== "Masukkan angka") {
+                if (!tableData[komponen]) {
+                    tableData[komponen] = [];
+                }
+
+                tableData[komponen].push({
+                    Mesin: mesin,
+                    Operator: operator,
+                    Komponen: komponen,
+                    Hasil: hasil,
+                    Tanggal: tanggal,
+                });
+
+                if (komponenTotal[komponen]) {
+                    komponenTotal[komponen] += hasil;
+                } else {
+                    komponenTotal[komponen] = hasil;
+                }
+
+                if (!historyData[mesin][komponen]) {
+                    historyData[mesin][komponen] = [];
+                }
+                historyData[mesin][komponen].push({
+                    Hasil: hasil,
+                    Tanggal: tanggal,
+                    Operator: operator, // Store the operator in historyData
+                });
+
+                saveData();
+                renderTable();
+                updateTotal();
+                renderTableRiwayat();
+            }
+        }
+
+        function hapusData(komponen, index) {
+            const mesin = document.getElementById('location_main').value;
+            const hasil = tableData[komponen][index].Hasil;
+
+            komponenTotal[komponen] -= hasil;
+            tableData[komponen].splice(index, 1);
+
+            if (tableData[komponen].length === 0) {
+                delete tableData[komponen];
+            }
+
+            if (historyData[mesin][komponen]) {
+                historyData[mesin][komponen].splice(index, 1);
+                if (historyData[mesin][komponen].length === 0) {
+                    delete historyData[mesin][komponen];
+                }
+            }
+
+            saveData();
+            renderTable();
+            updateTotal();
+            renderTableRiwayat();
+        }
+
+        function showDeleteConfirmation(komponen, index) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                hapusData(komponen, index);
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tabelInput').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = '';
+
+            const komponen = selectedListBox1Item || selectedListBox2Item;
+            if (tableData[komponen]) {
+                tableData[komponen].forEach((row, index) => {
+                    const rowElement = document.createElement('tr');
+                    rowElement.innerHTML = `
+                        <td>${row.Komponen}</td>
+                        <td>${row.Operator}</td>
+                        <td>${row.Mesin}</td>
+                        <td>${row.Hasil}</td>
+                        <td><button onclick="showDeleteConfirmation('${komponen}', ${index})">Hapus</button></td>
+                    `;
+                    tbody.appendChild(rowElement);
+                });
+            }
+
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const komponen = selectedListBox1Item || selectedListBox2Item;
+            document.getElementById('total_main').value = komponenTotal[komponen] || 0;
+        }
+
+        function saveData() {
+            localStorage.setItem('tableData', JSON.stringify(tableData));
+            localStorage.setItem('komponenTotal', JSON.stringify(komponenTotal));
+            localStorage.setItem('historyData', JSON.stringify(historyData));
+        }
+
+        function showRiwayat() {
+            const riwayatSection = document.getElementById('riwayatSection');
+            if (riwayatSection.style.display === 'none') {
+                riwayatSection.style.display = 'block';
+                renderTableRiwayat();
+            } else {
+                riwayatSection.style.display = 'none';
+            }
+        }
+
+        function renderTableRiwayat(location = 'all') {
+            const tbody = document.getElementById('tabelRiwayat').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = '';
+
+            for (const mesin in historyData) {
+                if (location === 'all' || mesin === location) {
+                    for (const komponen in historyData[mesin]) {
+                        historyData[mesin][komponen].forEach(data => {
+                            const rowElement = document.createElement('tr');
+                            rowElement.innerHTML = `
+                                <td>${data.Tanggal}</td>
+                                <td>${komponen}</td>
+                                <td>${data.Operator}</td> <!-- Use the stored operator -->
+                                <td>${mesin}</td>
+                                <td>${data.Hasil}</td>
+                            `;
+                            tbody.appendChild(rowElement);
+                        });
+                    }
+                }
+            }
+        }
+
+        function filterData() {
+            const location = document.getElementById('location_riwayat').value;
+            renderTableRiwayat(location);
+        }
+
+        function exportToExcel() {
+            const location = document.getElementById('location_riwayat').value;
+            const wb = XLSX.utils.book_new();
+            const wsData = [];
+
+            // Header untuk Excel
+            const header = ["Tanggal", "Nama Komponen", "Operator", "Mesin", "Hasil"];
+            wsData.push(header);
+
+            // Mengisi data berdasarkan lokasi (SMT 1-4 atau semua)
+            for (const mesin in historyData) {
+                if (location === 'all' || mesin === location) {
+                    for (const komponen in historyData[mesin]) {
+                        historyData[mesin][komponen].forEach(data => {
+                            const row = [
+                                data.Tanggal,
+                                komponen,
+                                data.Operator, // Use the stored operator
+                                mesin,
+                                data.Hasil
+                            ];
+                            wsData.push(row);
+                        });
+                    }
+                }
+            }
+
+            // Membuat worksheet dari data
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+            // Mengatur style untuk header (bold dan alignment)
+            const headerStyle = {
+                font: { bold: true },
+                alignment: { horizontal: 'center' }
+            };
+            for (let col = 0; col < header.length; col++) {
+                const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
+                if (!ws[cellAddress].s) ws[cellAddress].s = {};
+                Object.assign(ws[cellAddress].s, headerStyle);
+            }
+
+            // Menambahkan border ke semua sel
+            const range = XLSX.utils.decode_range(ws['!ref']);
+            for (let row = range.s.r; row <= range.e.r; row++) {
+                for (let col = range.s.c; col <= range.e.c; col++) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                    if (!ws[cellAddress].s) ws[cellAddress].s = {};
+                    ws[cellAddress].s.border = {
+                        top: { style: 'thin' },
+                        bottom: { style: 'thin' },
+                        left: { style: 'thin' },
+                        right: { style: 'thin' }
+                    };
+                }
+            }
+
+            // Menambahkan worksheet ke workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Data Komponen");
+
+            // Menyimpan file Excel
+            const fileName = location === 'all' ? 'Semua_SMT.xlsx' : `SMT_${location.split(' ')[1]}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+        }
+        function exportTotal() {
+        const location = document.getElementById('location_riwayat').value;
+        const wb = XLSX.utils.book_new();
+        const wsData = [];
+
+        // Header untuk Excel
+        const header = ["Tanggal", "Nama Komponen", "Total"];
+        wsData.push(header);
+
+        // Mengisi data berdasarkan lokasi (SMT 1-4 atau semua)
+        const totalData = {};
+
+        for (const mesin in historyData) {
+            if (location === 'all' || mesin === location) {
+                for (const komponen in historyData[mesin]) {
+                    if (!totalData[komponen]) {
+                        totalData[komponen] = { total: 0, tanggal: '' };
+                    }
+
+                    historyData[mesin][komponen].forEach(data => {
+                        totalData[komponen].total += data.Hasil;
+                        totalData[komponen].tanggal = data.Tanggal; // Assuming all dates are the same for simplicity
+                    });
+                }
+            }
+        }
+
+        // Mengisi data ke dalam wsData
+        for (const komponen in totalData) {
+            const row = [
+                totalData[komponen].tanggal,
+                komponen,
+                totalData[komponen].total
+            ];
+            wsData.push(row);
+        }
+
+        // Membuat worksheet dari data
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+        // Mengatur style untuk header (bold dan alignment)
+        const headerStyle = {
+            font: { bold: true },
+            alignment: { horizontal: 'center' }
+        };
+        for (let col = 0; col < header.length; col++) {
+            const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
+            if (!ws[cellAddress].s) ws[cellAddress].s = {};
+            Object.assign(ws[cellAddress].s, headerStyle);
+        }
+
+        // Menambahkan border ke semua sel
+        const range = XLSX.utils.decode_range(ws['!ref']);
+        for (let row = range.s.r; row <= range.e.r; row++) {
+            for (let col = range.s.c; col <= range.e.c; col++) {
+                const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                if (!ws[cellAddress].s) ws[cellAddress].s = {};
+                ws[cellAddress].s.border = {
+                    top: { style: 'thin' },
+                    bottom: { style: 'thin' },
+                    left: { style: 'thin' },
+                    right: { style: 'thin' }
+                };
+            }
+        }
+
+        // Menambahkan worksheet ke workbook
+        XLSX.utils.book_append_sheet(wb, ws, "Total Komponen");
+
+        // Menyimpan file Excel
+        const fileName = location === 'all' ? 'Total_Semua_SMT.xlsx' : `Total_SMT_${location.split(' ')[1]}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+    }
+
+
+        function resetData() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data?')) {
+                localStorage.removeItem('tableData');
+                localStorage.removeItem('komponenTotal');
+                localStorage.removeItem('historyData');
+                tableData = {};
+                komponenTotal = {};
+                historyData = {
+                    'SMT 1': {},
+                    'SMT 2': {},
+                    'SMT 3': {},
+                    'SMT 4': {},
+                };
+                renderTable();
+                updateTotal();
+                renderTableRiwayat();
+                alert('Data telah direset.');
+            }
+        }
+    </script>
+</body>
+</html>
