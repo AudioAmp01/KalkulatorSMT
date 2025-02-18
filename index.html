@@ -177,16 +177,15 @@
             document.addEventListener("DOMContentLoaded", function() {
                 let barcodeInput = "";
         
+                // Menangkap event keydown untuk barcode
                 document.addEventListener("keydown", function(event) {
-                    if (event.key === "Enter") {
-                        if (barcodeInput === "412077") {
-                            document.getElementById("operator_main").value = "Deimozt";
-                        } else {
-                            document.getElementById("operator_main").value = barcodeInput; // Jika bukan barcode yang diatur, tetap tampilkan input
-                        }
-                        barcodeInput = ""; // Reset setelah Enter
-                    } else {
-                        barcodeInput += event.key;
+                    // Menambahkan karakter ke barcodeInput saat scan barcode
+                    barcodeInput += event.key;
+        
+                    // Jika barcode yang terdeteksi adalah "412077"
+                    if (barcodeInput === "412077") {
+                        document.getElementById("operator_main").value = "Deimozt";
+                        barcodeInput = ""; // Reset input setelah barcode lengkap
                     }
                 });
             });
