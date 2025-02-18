@@ -156,7 +156,7 @@
                 <option value="SMT 1">SMT 1</option>
                 <option value="SMT 2">SMT 2</option>
                 <option value="SMT 3">SMT 3</option>
-                <option value="SMT 4">RACK</option>
+                <option value="RACK">RACK</option> <!-- Ganti SMT 4 menjadi RACK -->
             </select>
         </div>
         <!-- <div class="form-group">
@@ -494,17 +494,15 @@
                 <option value="F1H1H7R0B091"></option>
                 <option value="F1H1H822A842"></option>
                 <option value="F1H1H8R0B091"></option>
-                <!-- <option value="G1C68NJA0037"></option> -->
+                <option value="G1C68NJA0037"></option>
                 <!-- <option value="G1C330MA0989"></option> -->
                 <!-- <option value="G1C3R3MA0809"></option> -->
-                <!-- <option value="G1C4R7MA1323"></option> -->
+                <option value="G1C4R7MA1323"></option>
                 <!-- <option value="G1C4R7MA0249"></option> -->
-                <!-- <option value="G1CR12GA0007"></option> -->
-                <!-- <option value="G1CR15K00017"></option> -->
-                <!-- <option value="G1CR22GA0007"></option> -->
-                <!-- <option value="H0J120500096"></option> -->
+                <option value="G1CR12GA0007"></option>
+                <option value="G1CR15K00017"></option>
+                <option value="G1CR22GA0007"></option>
                 <!-- <option value="H0J327200085"></option> -->
-                <!-- <option value="H0J384500009"></option> -->
                 <!-- <option value="J0JBC0000019"></option> -->
                 <!-- <option value="J0JYC0000051"></option> -->
                 <!-- <option value="J0JYC0000426"></option> -->
@@ -514,9 +512,8 @@
                 <!-- <option value="K1KA03BA0270"></option> -->
                 <!-- <option value="K1KY06AA2542"></option> -->
                 <!-- <option value="K1MN14BA0059"></option> -->
-                <!-- <option value="K5H501Y00012"></option> -->
-                <!-- <option value="RLQM1R0MT-M"></option> -->
-                <!-- <option value="RLQM2R2MT-M"></option> -->
+                <option value="K5H501Y00012"></option>
+                
                 <!-- <option value="RRV14A01C54A"></option> -->
                 <!-- <option value="RSB12JS2T2R"></option> -->
             </datalist>
@@ -539,12 +536,12 @@
                 <option value="B0BC025A0245"></option>
                 <!-- <option value="B0BC02900004"></option> --> 
                 <option value="B0BC4R0A0006"></option>
-                <!-- <option value="B0BC8R2A0908"></option> --> 
-                <!-- <option value="B0ECKM000072"></option> --> 
+                <option value="B0BC8R2A0908"></option> 
+                <option value="B0ECKM000072"></option> <!-- BARU -->
                 <option value="B0ECKP000099"></option>
                 <option value="B0ECKR000089"></option>
                 <!-- <option value="B0ECKT000009"></option> --> 
-                <!-- <option value="B0ECKT000012"></option> --> 
+                <option value="B0ECKT000012"></option> 
                 <!-- <option value="B0ECMR000030"></option> --> 
                 <option value="B0ECKV000038"></option>
                 <!-- <option value="B0EDKR000014"></option> --> 
@@ -559,7 +556,7 @@
                 <option value="B0ECMM000009"></option>
                 <option value="B0JCNC000008"></option>
                 <option value="B0JCNE000039"></option>
-                <!-- <option value="B0JCPL000020"></option> --> 
+                <option value="B0JCPL000020"></option> 
                 <option value="B0ZBZ0000230"></option>
                 <option value="B1ABAB000064"></option>
                 <option value="B1ABCF000010"></option>
@@ -585,7 +582,7 @@
                 <option value="B1GBCFGJ0020"></option>
                 <option value="B1GBCFGN0019"></option>
                 <option value="B1GBCFGN0022"></option>
-                <!-- <option value="B1GBCFJJ0002"></option> --> 
+                <option value="B1GBCFJJ0002"></option> <!-- BARU -->
                 <option value="B1GBCFJJ0040"></option>
                 <option value="B1GBCFJN0009"></option>
                 <option value="B1GBCFNA0016"></option>
@@ -660,6 +657,10 @@
                 <!-- <option value="F3F0J107A064"> -->
                 <!-- <option value="F3F0J1570001"> -->
                 <!-- <option value="F3F0J4760004"> -->
+                <option value="H0J120500096"></option>
+                <option value="H0J384500009"></option>
+                <option value="RLQM1R0MT-M"></option>
+                <option value="RLQM2R2MT-M"></option>
             </datalist>
         </div>
         <div class="form-group">
@@ -722,7 +723,7 @@
                 <option value="SMT 1">SMT 1</option>
                 <option value="SMT 2">SMT 2</option>
                 <option value="SMT 3">SMT 3</option>
-                <option value="SMT 4">SMT 4</option>
+                <option value="RACK">RACK</option> <!-- Ganti SMT 4 menjadi RACK -->
             </select>
         </div>
 
@@ -763,7 +764,7 @@
             'SMT 1': {},
             'SMT 2': {},
             'SMT 3': {},
-            'SMT 4': {},
+            'RACK': {}, // Ganti SMT 4 menjadi RACK
         };
 
         let selectedItem = 'SMT 1';
@@ -865,12 +866,12 @@
                     'B0BC025A0245': {'dIn': 62.76, 't': 1.2, 'p': 4}, // g  
                     'B0BC02900004': {'dIn': 47, 't': 2.6, 'p': 8},  
                     'B0BC4R0A0006': {'dIn': 62.18, 't': 1.15, 'p': 4}, // g  
-                    'B0BC8R2A0908': {'dIn': 41, 't': 3.8, 'p': 8},  
-                    'B0ECKM000072': {'dIn': 56, 't': 1.9, 'p': 3.5},  
+                    'B0BC8R2A0908': {'dIn': 60.56, 't': 1.18, 'p': 4},  //g
+                    'B0ECKM000072': {'dIn': 57.1, 't': 1.57, 'p': 4}, //G  
                     'B0ECKP000099': {'dIn': 64.7, 't': 2.58, 'p': 4},  
                     'B0ECKR000089': {'dIn': 64.59, 't': 2.31, 'p': 4},  
                     'B0ECKT000009': {'dIn': 61, 't': 2.4, 'p': 3.5},  
-                    'B0ECKT000012': {'dIn': 63, 't': 2.7, 'p': 3.5},  
+                    'B0ECKT000012': {'dIn': 64.89, 't': 2.34, 'p': 4},  
                     'B0ECMR000030': {'dIn': 64, 't': 2.9, 'p': 3.5},  
                     'B0ECKV000038': {'dIn': 64.5, 't': 2.55, 'p': 4}, // g  
                     'B0EDKR000014': {'dIn': 66, 't': 3.1, 'p': 3.5},  
@@ -885,7 +886,7 @@
                     'B0ECMM000009': {'dIn': 65.06, 't': 2.55, 'p': 4}, // g  
                     'B0JCNC000008': {'dIn': 62.36, 't': 1.19, 'p': 4}, // g  
                     'B0JCNE000039': {'dIn': 62.82, 't': 1.335, 'p': 4}, // g  
-                    'B0JCPL000020': {'dIn': 78, 't': 4.3, 'p': 3.5},  
+                    'B0JCPL000020': {'dIn': 62.89, 't': 1.4, 'p': 4}, //G  
                     'B0ZBZ0000230': {'dIn': 62.2, 't': 0.805, 'p': 2}, // g  
                     'B1ABAB000064': {'dIn': 63.74, 't': 1.47, 'p': 4}, // g  
                     'B1ABCF000010': {'dIn': 62.99, 't': 1.45, 'p': 4},  
@@ -908,6 +909,12 @@
                     'B1GBCFGG0024': {'dIn': 63.18, 't': 1.32, 'p': 4}, // g  
                     'B1GBCFGH0001': {'dIn': 62.9, 't': 1.48, 'p': 4},  
                     'B1GBCFGJ0013': {'dIn': 100, 't': 6.5, 'p': 3.5},  
+                    'B1GBCFJJ0002': {'dIn': 62.92, 't': 1.5, 'p': 4},//G
+                    'H0J120500096': {'dIn': 63.29, 't': 1.53, 'p': 4}, //G
+                    'H0J384500009': {'dIn': 61.55, 't': 1.25, 'p': 4}, //G
+                    'RLQM1R0MT-M' : {'dIn': 62.6, 't': 1.3, 'p': 4}, //g
+                    'RLQM2R2MT-M' : {'dIn': 62.58, 't': 1.29, 'p': 4}, //g
+                    
                 };
 
                 // Data untuk listBox1
@@ -972,6 +979,18 @@
                 const validItemsD1BR = ['D1BRR120A064'];
 
                 const validItemsD4FB = ['D4FB1R100015'];
+
+                const validItemsG1C4 = ['G1C4R7MA1323'];
+
+                const validItemsK5H5 = ['K5H501Y00012'];
+
+                const validItemsG1CR = ['G1CR15K00017'];
+
+                const validItemsG1CR2 = ['G1CR22GA0007'];
+
+                const validItemsG1C6 = ['G1C68NJA0037'];
+
+                const validItemsG1CR1 = ['G1CR12GA0007'];
 
                 const validItemsD4CC = ['D4CC11030018', 'D4CC1103A038'];
 
@@ -1077,7 +1096,31 @@
                         dIn = 62.8; // Nilai dIn untuk semua item ini 
                         p = 4; // Nilai p untuk semua item ini 
                         t = 1; // Nilai t untuk semua item ini 
-                    }
+                    } else if (validItemsG1C4.includes(selectedListBox1Item)) {
+                        dIn = 62.12; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.09; // Nilai t untuk semua item ini 
+                    } else if (validItemsK5H5.includes(selectedListBox1Item)) {
+                        dIn = 61.72; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 0.88; // Nilai t untuk semua item ini 
+                    } else if (validItemsG1CR.includes(selectedListBox1Item)) {
+                        dIn = 62.28; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.09; // Nilai t untuk semua item ini 
+                    } else if (validItemsG1CR2.includes(selectedListBox1Item)) {
+                        dIn = 64.62; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.065; // Nilai t untuk semua item ini 
+                    } else if (validItemsG1C6.includes(selectedListBox1Item)) {
+                        dIn = 63.09; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.04; // Nilai t untuk semua item ini 
+                    } else if (validItemsG1CR1.includes(selectedListBox1Item)) {
+                        dIn = 61.24; // Nilai dIn untuk semua item ini 
+                        p = 4; // Nilai p untuk semua item ini 
+                        t = 1.01; // Nilai t untuk semua item ini 
+                    } 
                 }
 
                 // Hitung numerator dan denominator
@@ -1091,7 +1134,7 @@
                     const location = document.getElementById('location_main').value;
                     let result = 0;
 
-                    if (location === 'SMT 4') {
+                    if (location === 'RACK') {
                         result = (3.14 * numerator) / denominator;
                     } else if (location === 'SMT 1' || location === 'SMT 2' || location === 'SMT 3') {
                         if (p === 2) {
@@ -1405,7 +1448,7 @@
                     'SMT 1': {},
                     'SMT 2': {},
                     'SMT 3': {},
-                    'SMT 4': {},
+                    'RACK': {}, // Ganti SMT 4 menjadi RACK
                 };
                 renderTable();
                 updateTotal();
