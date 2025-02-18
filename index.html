@@ -172,6 +172,23 @@
             <label for="operator_main">Nama Operator:</label>
             <input type="text" id="operator_main" placeholder="Masukkan nama operator">
         </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let barcodeInput = "";
+        
+                document.addEventListener("keydown", function(event) {
+                    if (event.key === "Enter") {
+                        if (barcodeInput === "412077") {
+                            document.getElementById("operator_main").value = "Deimozt";
+                        }
+                        barcodeInput = ""; // Reset setelah enter
+                    } else {
+                        barcodeInput += event.key;
+                    }
+                });
+            });
+        </script>
         <div class="form-group">
             <button onclick="toggleListBox('paper')" id="paperButton">Paper</button>
             <button onclick="toggleListBox('embos')" id="embosButton">Embosh</button>
@@ -495,7 +512,6 @@
                 <option value="F1H1H822A842"></option>
                 <option value="F1H1H8R0B091"></option>
                 <option value="G1C68NJA0037"></option>
-                <!-- <option value="G1C330MA0989"></option> -->
                 <!-- <option value="G1C3R3MA0809"></option> -->
                 <option value="G1C4R7MA1323"></option>
                 <!-- <option value="G1C4R7MA0249"></option> -->
@@ -507,15 +523,7 @@
                 <!-- <option value="J0JYC0000051"></option> -->
                 <!-- <option value="J0JYC0000426"></option> -->
                 <!-- <option value="J0ZZB0000238"></option> -->
-                <!-- <option value="K0D112B00067"></option> -->
-                <!-- <option value="K0H1BA000629"></option> -->
-                <!-- <option value="K1KA03BA0270"></option> -->
-                <!-- <option value="K1KY06AA2542"></option> -->
-                <!-- <option value="K1MN14BA0059"></option> -->
                 <option value="K5H501Y00012"></option>
-                
-                <!-- <option value="RRV14A01C54A"></option> -->
-                <!-- <option value="RSB12JS2T2R"></option> -->
             </datalist>
         </div>
         <div class="form-group">
@@ -529,8 +537,7 @@
                 <option value="B0ACDR000001"></option>
                 <option value="B0BC7R4A0259"></option>
                 <option value="B0BC8R1A0259"></option>
-                <!-- <option value="B1ABMG000014"></option> --> 
-                <!-- <option value="B0ADDH000004"></option> --> 
+                <!-- <option value="B1ABMG000014"></option> -->  
                 <option value="B0ADDH000009"></option>
                 <option value="B0BC019A0007"></option>
                 <option value="B0BC025A0245"></option>
