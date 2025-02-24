@@ -1,0 +1,338 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype'); /* Ganti dengan nama file yang sesuai */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.ttf') format('truetype'); /* Ganti dengan nama file yang sesuai */
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Styling untuk section FAQ */
+#faq {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling judul FAQ */
+#faq h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Styling garis pemisah */
+#faq hr {
+    width: 50%;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+}
+
+/* Styling untuk setiap item FAQ */
+.faq-item {
+    background: #ffffff;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect pada FAQ item */
+.faq-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling untuk pertanyaan */
+.faq-item h3 {
+    font-size: 18px;
+    color: #f44336;
+    margin-bottom: 5px;
+}
+
+/* Styling untuk jawaban */
+.faq-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Styling untuk daftar bullet dalam jawaban */
+.faq-item ul {
+    padding-left: 20px;
+}
+
+.faq-item ul li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+.faq-item img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* whatsapp*/
+/* Styling untuk bagian kontak */
+.faq-contact {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Styling untuk link WhatsApp */
+.whatsapp-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: #25D366;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+/* Efek hover */
+.whatsapp-link:hover {
+    background-color: #1ebe5d;
+}
+
+/* Styling untuk logo WhatsApp */
+.whatsapp-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+
+
+body, h1, h2, h3, h4, h5 {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 16px;
+}
+
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #f44336;
+    color: white;
+    padding: 20px;
+    z-index: 3;
+}
+
+.sidebar-header {
+    padding: 20px;
+}
+
+.sidebar-content a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar-content a:hover {
+    background-color: #fff;
+    color: #f44336;
+}
+
+.top-header {
+    display: flex;
+    align-items: center;
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.open-btn {
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+}
+
+.main-content {
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.header {
+    margin-top: 80px;
+}
+
+.header h1 {
+    font-size: 3em;
+}
+
+.highlight {
+    color: red;
+}
+
+/* Card tempat foto */
+.photo-card {
+    background: #fff; /* Warna background card */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Batasi lebar card */
+    margin: auto; /* Pusatkan card di tengah */
+    text-align: center;
+}
+
+/* Row untuk 2 gambar dalam satu baris */
+.photo-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Jarak antar gambar */
+    margin-bottom: 10px;
+}
+
+/* Gambar di dalam card */
+.photo-row img {
+    width: 400px; /* Lebar default untuk layar besar */
+    height: 400px; /* Tinggi default untuk layar besar */
+    object-fit: cover; /* Pastikan gambar tidak terdistorsi */
+    border-radius: 5px; /* Membuat sudut lebih halus */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Media query untuk layar dengan maksimal lebar 768px (misalnya tablet) */
+@media (max-width: 480px) {
+    .photo-row img {
+        width: 100%; /* Lebar 100% dari kontainer */
+        height: auto; /* Tinggi otomatis untuk menjaga rasio aspek */
+    }
+}
+
+/* Media query untuk layar dengan maksimal lebar 480px (misalnya smartphone) */
+@media (max-width: 480px) {
+    .photo-row img {
+        width: 100%; /* Lebar 100% dari kontainer */
+        height: auto; /* Tinggi otomatis untuk menjaga rasio aspek */
+    }
+}
+
+/* Efek hover */
+.photo-row img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsif: Jika layar kecil, ubah menjadi 1 foto per baris */
+@media (max-width: 480px) {
+    .photo-row {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    padding-top: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    text-align: center;
+    padding: 64px;
+}
+
+.modal-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.close-btn {
+    color: white;
+    font-size: 40px;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.section {
+    margin-top: 75px;
+}
+
+.team {
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-member {
+    width: 30%;
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+}
+
+.pricing-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.package {
+    width: 48%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+.package.highlight {
+    background-color: #f44336;
+    color: white;
+}
+
+.footer {
+    background-color: #f1f1f1;
+    padding: 32px;
+    text-align: right;
+}
