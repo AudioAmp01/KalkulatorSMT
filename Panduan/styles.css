@@ -86,6 +86,101 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling Section Tutorial */
+#tutorial {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Tutorial */
+#tutorial h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Garis pemisah */
+#tutorial hr {
+    width: 50%;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+}
+
+/* Container untuk Tutorial */
+.tutorial-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* FAQ Tutorial Item */
+.faq-tutorial {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.faq-tutorial:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Step Number */
+.step-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background: #f44336;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+/* Tutorial Content */
+.tutorial-content {
+    flex: 1;
+}
+
+/* Judul tiap tutorial */
+.tutorial-content h3 {
+    font-size: 18px;
+    color: #f44336;
+    margin-bottom: 5px;
+}
+
+/* Deskripsi tutorial */
+.tutorial-content p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Gambar tutorial */
+.tutorial-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
 
 /* whatsapp*/
 /* Styling untuk bagian kontak */
